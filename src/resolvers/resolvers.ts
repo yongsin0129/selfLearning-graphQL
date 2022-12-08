@@ -15,8 +15,11 @@ const resolvers: IResolvers = {
     users: () => users
   },
   Mutation: {
+    // 需注意！args 打開後第一層為 input ，再進去一層才是 title, content
     addPost: (root, args, context) => {
-      const { title, content } = args
+      const {
+        input: { title, content }
+      } = args
       // 新增 post
       posts.push({
         id: posts.length + 1,

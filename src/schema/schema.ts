@@ -3,7 +3,7 @@ import { gql } from 'apollo-server'
 
 // GraphQL Schema 定義
 const typeDefs = gql`
-# Query 定義 
+  # Query 定義
   type Query {
     "A simple type for getting started!"
     hello: String
@@ -17,7 +17,7 @@ const typeDefs = gql`
   # Mutation 定義
   type Mutation {
     "新增貼文"
-    addPost(title: String!, content: String!): Post
+    addPost(input: AddPostInput!): Post
     "貼文按讚 (收回讚)"
     likePost(postId: ID!): Post
   }
@@ -79,6 +79,14 @@ const typeDefs = gql`
     GRAM
     "磅 (1 磅 = 0.45359237 公斤)"
     POUND
+  }
+
+  """
+  addPost() input type
+  """
+  input AddPostInput {
+    title: String!
+    content: String
   }
 `
 export default typeDefs
