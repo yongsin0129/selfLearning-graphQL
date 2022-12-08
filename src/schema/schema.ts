@@ -3,6 +3,16 @@ import { gql } from 'apollo-server'
 
 // GraphQL Schema 定義
 const typeDefs = gql`
+  type Query {
+    "A simple type for getting started!"
+    hello: String
+    "取得當下使用者"
+    me: User
+    "取得所有使用者"
+    users: [User]
+    "取得特定 user (name 為必填)"
+    user(name: String!): User
+  }
   """
   使用者
   """
@@ -19,6 +29,24 @@ const typeDefs = gql`
     height(unit: HeightUnit = CENTIMETRE): Float
     "體重 (預設為 KILOGRAM)"
     weight(unit: WeightUnit = KILOGRAM): Float
+    "取得 Post"
+    posts: [Post]
+  }
+
+  """
+  貼文
+  """
+  type Post {
+    "識別碼"
+    id: ID!
+    "作者"
+    author: User
+    "標題"
+    title: String
+    "內容"
+    content: String
+    "按讚者"
+    likeGivers: [User]
   }
 
   """
@@ -43,17 +71,6 @@ const typeDefs = gql`
     GRAM
     "磅 (1 磅 = 0.45359237 公斤)"
     POUND
-  }
-
-  type Query {
-    "A simple type for getting started!"
-    hello: String
-    "取得當下使用者"
-    me: User
-    "取得所有使用者"
-    users: [User]
-    "取得特定 user (name 為必填)"
-    user(name: String!): User
   }
 `
 export default typeDefs
