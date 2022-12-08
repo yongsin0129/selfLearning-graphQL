@@ -1,13 +1,11 @@
 import { ApolloServer } from 'apollo-server'
-import typeDefs from './schema/schema'
+// ApolloServer: 讓我們啟動 server 的 class ，不但實作許多 GraphQL 功能也提供 web application 的功能 (背後使用 express)
 
+import typeDefs from './schema/schema'
 import { resolvers } from './resolvers/resolvers'
 
-const server = new ApolloServer({
-  // 用 Node.js 的 fs 和 path 模組 來讀取我們的 schema 檔案
-  typeDefs,
-  resolvers
-})
+// 初始化 Web Server ，需傳入 typeDefs (Schema) 與 resolvers (Resolver)
+const server = new ApolloServer({ typeDefs, resolvers })
 
 server.listen().then(({ url }) => {
   console.log(`Server is running on ${url}`)
