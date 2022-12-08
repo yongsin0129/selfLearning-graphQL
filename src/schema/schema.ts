@@ -3,6 +3,7 @@ import { gql } from 'apollo-server'
 
 // GraphQL Schema 定義
 const typeDefs = gql`
+# Query 定義 
   type Query {
     "A simple type for getting started!"
     hello: String
@@ -12,6 +13,13 @@ const typeDefs = gql`
     users: [User]
     "取得特定 user (name 為必填)"
     user(name: String!): User
+  }
+  # Mutation 定義
+  type Mutation {
+    "新增貼文"
+    addPost(title: String!, content: String!): Post
+    "貼文按讚 (收回讚)"
+    likePost(postId: ID!): Post
   }
   """
   使用者

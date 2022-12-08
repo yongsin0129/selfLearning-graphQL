@@ -1,5 +1,7 @@
 import { IResolvers } from '@graphql-tools/utils'
 export { resolvers }
+const meId = 1
+
 // Resolvers 是一個會對照 Schema 中 field 的 function map ，讓你可以計算並回傳資料給 GraphQL Server
 const resolvers: IResolvers = {
   Query: {
@@ -11,6 +13,37 @@ const resolvers: IResolvers = {
       return users.find(user => user.name === name)
     },
     users: () => users
+  },
+  Mutation: {
+    addPost: (root, args, context) => {
+      const { title, content } = args
+      // 新增 post
+      posts.push({
+        id: posts.length + 1,
+        authorId: meId,
+        title,
+        content,
+        likeGiverIds: [],
+        createdAt: Date()
+      })
+      // 回傳新增的那篇 post
+      return posts[posts.length - 1]
+    },
+    likePost: (root, args, context) => {
+      const { postId } = args
+      const post = findPostById(postId)
+      if (!post) throw new Error(`Post id : ${postId} Not Exists`)
+
+      if (post.likeGiverIds.includes(meId)) {
+        // 如果已經按過讚就收回
+        const index = post.likeGiverIds.findIndex(v => v === meId)
+        post.likeGiverIds.splice(index, 1)
+      } else {
+        // 否則就加入 likeGiverIds 名單
+        post.likeGiverIds.push(meId)
+      }
+      return post
+    }
   },
   // schema 中的 type User 可以為每個 Field 設定 Resolver
   User: {
@@ -61,6 +94,7 @@ const resolvers: IResolvers = {
 
 // Helper Functions
 const findUserById = (id: number) => users.find(user => user.id === id)
+const findPostById = (id: number) => posts.find(post => post.id === id)
 const findUserByName = (name: string) => users.find(user => user.name === name)
 const filterPostsByAuthorId = (authorId: number) =>
   posts.filter(post => post.authorId === authorId)
