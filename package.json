@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/server": "^4.2.2",
     "@types/node": "^18.11.11",
     "apollo-server": "^3.11.1",
     "graphql": "^16.6.0",
@@ -21,10 +22,10 @@
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.16.1",
+    "@graphql-codegen/introspection": "2.2.3",
     "@graphql-codegen/typescript": "2.8.5",
     "@graphql-codegen/typescript-document-nodes": "2.3.10",
-    "@graphql-codegen/typescript-resolvers": "2.7.10",
     "@graphql-codegen/typescript-mongodb": "2.4.6",
-    "@graphql-codegen/introspection": "2.2.3"
+    "@graphql-codegen/typescript-resolvers": "2.7.10"
   }
 }
