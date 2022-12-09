@@ -13,6 +13,8 @@ interface MyContext {
   token?: String
 }
 
+const port = Number(process.env.PORT) || 4000
+
 // 初始化 Web Server ，需傳入 typeDefs (Schema) 與 resolvers (Resolver)
 const server = new ApolloServer<MyContext>({
   typeDefs,
@@ -24,7 +26,7 @@ const server = new ApolloServer<MyContext>({
       ? ApolloServerPluginLandingPageProductionDefault({
           graphRef: 'my-graph-id@my-graph-variant',
           footer: false,
-          embed:true,
+          embed: true
         })
       : ApolloServerPluginLandingPageLocalDefault({ footer: false })
   ]
@@ -32,7 +34,7 @@ const server = new ApolloServer<MyContext>({
 const boost = async () => {
   const { url } = await startStandaloneServer(server, {
     context: async ({ req }) => ({ token: req.headers.token }),
-    listen: { port: 4000 }
+    listen: { port: port }
   })
   console.log(`🚀  Server ready at ${url}`)
 }
