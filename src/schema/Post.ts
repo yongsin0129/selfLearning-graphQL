@@ -10,12 +10,16 @@ const typeDefs_Post = gql`
     id: ID!
     "作者"
     author: User
+    "作者Id"
+    authorId: String
     "標題"
     title: String
     "內容"
     content: String
     "按讚者"
     likeGivers: [User]
+    "按讚者Id"
+    likeGiverIds: [String]
   }
 
   """

@@ -14,6 +14,8 @@ const typeDefs_User = gql`
     age: Int
     "朋友們"
     friends: [User]
+    "朋友們Id"
+    friendIds: [String]
     "身高 (預設為 CENTIMETRE)"
     height(unit: HeightUnit = CENTIMETRE): Float
     "體重 (預設為 KILOGRAM)"

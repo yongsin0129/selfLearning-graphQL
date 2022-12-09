@@ -4,8 +4,8 @@ import { user_field_resolvers } from './user.field.resolvers'
 import { post_field_resolvers } from './post.field.resolvers'
 
 export const resolvers = {
-  ...query_resolvers,
-  ...mutation_resolvers,
-  ...user_field_resolvers,
-  ...post_field_resolvers
+  Query: query_resolvers,
+  Mutation: mutation_resolvers,
+  User: user_field_resolvers,
+  Post: post_field_resolvers
 }
