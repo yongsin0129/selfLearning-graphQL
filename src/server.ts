@@ -8,7 +8,7 @@ import { resolvers } from './resolvers'
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  persistedQueries: false
+  cache: 'bounded'
 })
 
 server.listen().then(({ url }) => {
