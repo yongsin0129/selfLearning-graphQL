@@ -7,7 +7,8 @@ import { resolvers } from './resolvers'
 // 初始化 Web Server ，需傳入 typeDefs (Schema) 與 resolvers (Resolver)
 const server = new ApolloServer({
   typeDefs,
-  resolvers
+  resolvers,
+  persistedQueries: false
 })
 
 server.listen().then(({ url }) => {
